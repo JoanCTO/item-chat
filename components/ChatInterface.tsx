@@ -137,21 +137,21 @@ export default function ChatInterface() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900 text-white">
+    <div className="flex flex-col h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-slate-800">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-gray-700">
-        <div className="flex items-center gap-3">
+      <header className="flex items-center justify-between p-6 bg-white/80 backdrop-blur-sm border-b border-slate-200/60">
+        <div className="flex items-center gap-4">
           <button
             onClick={clearChat}
-            className="flex items-center justify-center w-10 h-10 hover:bg-gray-800 rounded-lg transition-colors"
+            className="flex items-center justify-center w-10 h-10 hover:bg-slate-100 rounded-xl transition-all duration-200 hover:scale-105"
             title="New Chat"
           >
-            <Bars3Icon className="size-5" />
+            <Bars3Icon className="size-5 text-slate-600" />
           </button>
-          <h1 className="text-lg font-semibold">ChatGPT</h1>
+          <h1 className="text-xl font-light text-slate-700">ItemChat</h1>
         </div>
-        <div className="flex items-center gap-2">
-          <button className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 rounded-lg text-sm font-medium transition-colors">
+        <div className="flex items-center gap-3">
+          <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-500/25">
             Get Plus
           </button>
         </div>
@@ -161,17 +161,20 @@ export default function ChatInterface() {
       <main className="flex-1 overflow-hidden">
         {messages.length === 0 ? (
           // Empty State
-          <div className="flex flex-col items-center justify-center h-full px-4">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-light mb-2">
-                What are you working on?
+          <div className="flex flex-col items-center justify-center h-full px-6">
+            <div className="text-center mb-12 max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-light mb-4 text-slate-700 leading-relaxed">
+                All the basics,
               </h2>
+              <p className="text-xl md:text-2xl text-slate-500 font-light">
+                connected to something far smarter
+              </p>
             </div>
           </div>
         ) : (
           // Messages
           <div className="flex flex-col h-full">
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -180,13 +183,13 @@ export default function ChatInterface() {
                   }`}
                 >
                   <div
-                    className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 ${
+                    className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-5 py-4 shadow-sm ${
                       message.isUser
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-800 text-gray-100"
+                        ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-blue-500/20"
+                        : "bg-white/80 backdrop-blur-sm text-slate-700 border border-slate-200/60 shadow-slate-200/40"
                     }`}
                   >
-                    <p className="text-sm md:text-base whitespace-pre-wrap">
+                    <p className="text-sm md:text-base whitespace-pre-wrap leading-relaxed">
                       {message.content}
                     </p>
                   </div>
@@ -196,20 +199,22 @@ export default function ChatInterface() {
               {/* Loading indicator */}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-4 py-3 bg-gray-800 text-gray-100">
-                    <div className="flex items-center gap-2">
+                  <div className="max-w-[85%] md:max-w-[70%] rounded-2xl px-5 py-4 bg-white/80 backdrop-blur-sm border border-slate-200/60 shadow-sm">
+                    <div className="flex items-center gap-3">
                       <div className="flex gap-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-slate-400 rounded-full animate-pulse"></div>
                         <div
-                          className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                          className="w-2 h-2 bg-slate-400 rounded-full animate-pulse"
                           style={{ animationDelay: "0.2s" }}
                         ></div>
                         <div
-                          className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"
+                          className="w-2 h-2 bg-slate-400 rounded-full animate-pulse"
                           style={{ animationDelay: "0.4s" }}
                         ></div>
                       </div>
-                      <span className="text-sm text-gray-400">Thinking...</span>
+                      <span className="text-sm text-slate-500 font-light">
+                        Thinking...
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -222,16 +227,16 @@ export default function ChatInterface() {
       </main>
 
       {/* Input Area */}
-      <div className="border-t border-gray-700 p-4">
+      <div className="bg-white/80 backdrop-blur-sm border-t border-slate-200/60 p-6">
         <form onSubmit={handleSubmit} className="relative">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {/* Tools Button */}
             <button
               type="button"
-              className="flex-shrink-0 flex items-center justify-center w-10 h-10 hover:bg-gray-800 rounded-lg transition-colors"
+              className="flex-shrink-0 flex items-center justify-center w-11 h-11 hover:bg-slate-100 rounded-xl transition-all duration-200 hover:scale-105"
               title="Tools"
             >
-              <PlusIcon className="size-5" />
+              <PlusIcon className="size-5 text-slate-600" />
             </button>
 
             {/* Input Container */}
@@ -243,7 +248,7 @@ export default function ChatInterface() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything..."
                 disabled={isLoading}
-                className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 pr-12 text-white placeholder:text-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-12 max-h-32 overflow-y-auto disabled:opacity-50"
+                className="w-full bg-white/90 backdrop-blur-sm border border-slate-200/80 rounded-2xl px-5 py-4 pr-14 text-slate-700 placeholder:text-slate-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white transition-all duration-200 disabled:opacity-50 min-h-12 max-h-32 overflow-y-auto shadow-sm shadow-slate-200/50"
                 rows={1}
               />
 
@@ -251,7 +256,7 @@ export default function ChatInterface() {
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isLoading}
-                className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 text-slate-400 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-110"
               >
                 <PaperAirplaneIcon className="size-5" />
               </button>
@@ -262,10 +267,10 @@ export default function ChatInterface() {
               type="button"
               onClick={() => setIsListening(!isListening)}
               disabled={isLoading}
-              className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg transition-colors disabled:opacity-50 ${
+              className={`flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 ${
                 isListening
-                  ? "bg-red-600 hover:bg-red-700"
-                  : "hover:bg-gray-800"
+                  ? "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg shadow-red-500/25"
+                  : "hover:bg-slate-100 text-slate-600"
               }`}
               title="Microphone"
             >
@@ -275,8 +280,8 @@ export default function ChatInterface() {
         </form>
 
         {/* Footer Text */}
-        <p className="text-xs text-gray-500 text-center mt-3">
-          ChatGPT can make mistakes. Check important info.
+        <p className="text-xs text-slate-400 text-center mt-4 font-light">
+          ItemChat can make mistakes. Check important info.
         </p>
       </div>
     </div>

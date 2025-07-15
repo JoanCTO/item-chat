@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ChatGPT Clone",
-  description: "A ChatGPT-like interface built with Next.js",
+  title: "ItemChat",
+  description: "ItemChat application based on LLMs",
 };
 
 export default function RootLayout({
