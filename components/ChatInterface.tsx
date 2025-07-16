@@ -18,10 +18,6 @@ export default function ChatInterface() {
   );
 
   const { messages, sendMessage, status, error, setMessages } = useChat({
-    api: "/api/chat",
-    headers: {
-      "x-session-id": sessionId,
-    },
     onError: (error) => {
       console.error("Chat error:", error);
     },
@@ -30,7 +26,7 @@ export default function ChatInterface() {
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Derive loading state from status
-  const isLoading = status === "in_progress";
+  const isLoading = status === "streaming";
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -161,14 +157,14 @@ export default function ChatInterface() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               className={`text-xs px-2 py-1 rounded-full ${
-                status === "in_progress"
+                status === "streaming"
                   ? "bg-blue-100 text-blue-700"
                   : status === "error"
                   ? "bg-red-100 text-red-700"
                   : "bg-gray-100 text-gray-700"
               }`}
             >
-              {status === "in_progress"
+              {status === "streaming"
                 ? "Responding..."
                 : status === "error"
                 ? "Error"
