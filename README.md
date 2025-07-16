@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## ItemChat - Modern AI Chat Application
 
-## Getting Started
+A production-ready AI chat application demonstrating modern web development practices with real-time streaming, persistent state management, and professional user experience.
 
-First, run the development server:
+### 🎯 Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ItemChat showcases advanced full-stack development skills through a sophisticated AI chat interface that goes beyond basic implementations:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Real-time streaming with token-by-token AI responses
+- Dual persistence strategy for reliable data management
+- UX animations
+- Comprehensive error handling
+- Type-safe architecture with end-to-end TypeScript
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🏗️ Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![alt text](./docs/image.png)
 
-## Learn More
+### Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+#### Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js 15 with App Router
+- React 18 with TypeScript
+- Tailwind CSS 4.0
+- Framer Motion for animations
+- Vercel AI SDK React hooks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Backend
 
-## Deploy on Vercel
+- Next.js API Routes on Edge Runtime
+- Vercel AI SDK Core for streaming
+- OpenAI GPT-4o integration
+- In-memory session management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Performance Optimizations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GPU-accelerated animations using transform/opacity
+- Edge runtime for global distribution (via Vercel)
+
+### User Experience
+
+- Smooth message animations with stagger effects
+- Visual stability during content streaming
+- Responsive design across all devices
+
+### Scalability Considerations
+
+- Stateless API design for horizontal scaling
+- Session-based storage (upgradeable to Redis/DB)
+- Edge runtime deployment
+
+### Development time
+
+~ 4hrs
