@@ -18,6 +18,10 @@ export default function ChatInterface() {
   );
 
   const { messages, sendMessage, status, error, setMessages } = useChat({
+    api: "/api/chat",
+    headers: {
+      "x-session-id": sessionId,
+    },
     onError: (error) => {
       console.error("Chat error:", error);
     },
@@ -26,7 +30,7 @@ export default function ChatInterface() {
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Derive loading state from status
-  const isLoading = status === "streaming";
+  const isLoading = status === "in_progress";
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -157,14 +161,14 @@ export default function ChatInterface() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               className={`text-xs px-2 py-1 rounded-full ${
-                status === "streaming"
+                status === "in_progress"
                   ? "bg-blue-100 text-blue-700"
                   : status === "error"
                   ? "bg-red-100 text-red-700"
                   : "bg-gray-100 text-gray-700"
               }`}
             >
-              {status === "streaming"
+              {status === "in_progress"
                 ? "Responding..."
                 : status === "error"
                 ? "Error"
@@ -250,7 +254,7 @@ export default function ChatInterface() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    layout
+                    layout="position" // Only animate position, not size
                     className={`flex ${
                       message.role === "user" ? "justify-end" : "justify-start"
                     }`}
@@ -258,13 +262,13 @@ export default function ChatInterface() {
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       transition={{ duration: 0.2 }}
-                      className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-5 py-4 shadow-sm ${
+                      className={`max-w-[85%] md:max-w-[70%] rounded-2xl px-5 py-4 shadow-sm min-h-[3rem] flex items-start ${
                         message.role === "user"
                           ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-blue-500/20"
                           : "bg-white/80 backdrop-blur-sm text-slate-700 border border-slate-200/60 shadow-slate-200/40"
                       }`}
                     >
-                      <div className="text-sm md:text-base leading-relaxed">
+                      <div className="text-sm md:text-base leading-relaxed w-full">
                         {message.parts.map((part, i) => {
                           switch (part.type) {
                             case "text":
@@ -275,6 +279,7 @@ export default function ChatInterface() {
                                   animate={{ opacity: 1 }}
                                   transition={{ delay: i * 0.1 }}
                                   className="whitespace-pre-wrap"
+                                  style={{ minHeight: "1.25rem" }} // Ensure minimum height for text
                                 >
                                   {part.text}
                                 </motion.div>
